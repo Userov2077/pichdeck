@@ -12,17 +12,15 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Urbanist', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['Urbanist', 'sans-serif'] },
                     colors: {
-                        darkBg: '#0A0F14', /* Глубокий графит */
+                        darkBg: '#0A0F14',
                         glassBorder: 'rgba(255, 255, 255, 0.03)',
                         glassBorderHighlight: 'rgba(255, 255, 255, 0.08)',
-                        accentGreen: '#2EA071', /* Сдержанный изумруд */
-                        accentBlue: '#3B71CA',  /* Благородный синий */
-                        textMain: '#E2E8F0',    /* Слоновая кость / Светло-серый */
-                        textMuted: '#94A3B8'    /* Приглушенный серо-синий */
+                        accentGreen: '#2EA071', 
+                        accentBlue: '#3B71CA',  
+                        textMain: '#E2E8F0',
+                        textMuted: '#94A3B8'
                     }
                 }
             }
@@ -30,10 +28,9 @@
     </script>
 
     <style>
-        /* --- БАЗОВЫЕ СТИЛИ --- */
         body { background-color: #0A0F14; color: #E2E8F0; overflow: hidden; }
 
-        /* --- ЭЛЕГАНТНЫЙ ЖИДКИЙ ФОН (Deep Ocean & Forest) --- */
+        /* --- ЭЛЕГАНТНЫЙ ЖИДКИЙ ФОН --- */
         .liquid-bg { 
             position: fixed; top: -10%; left: -10%; width: 120vw; height: 120vh; z-index: -1; 
             background: #0A0F14;
@@ -43,25 +40,24 @@
             position: absolute; filter: blur(120px); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
             animation: morph 15s ease-in-out infinite alternate; opacity: 0.5;
         }
-        /* Богатые, сдержанные цвета */
-        .blob-1 { top: 0%; left: 0%; width: 55vw; height: 55vw; background: #0F4C3A; } /* Глубокий зеленый */
-        .blob-2 { bottom: -10%; right: -10%; width: 65vw; height: 65vw; background: #163C7A; animation-delay: -5s; } /* Глубокий синий */
-        .blob-3 { top: 20%; left: 30%; width: 45vw; height: 45vw; background: #1E293B; animation-delay: -10s; opacity: 0.6; } /* Темный сланец */
+        .blob-1 { top: 0%; left: 0%; width: 55vw; height: 55vw; background: #0F4C3A; } 
+        .blob-2 { bottom: -10%; right: -10%; width: 65vw; height: 65vw; background: #163C7A; animation-delay: -5s; } 
+        .blob-3 { top: 20%; left: 30%; width: 45vw; height: 45vw; background: #1E293B; animation-delay: -10s; opacity: 0.6; } 
 
         @keyframes morph {
             0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: translate(0, 0) rotate(0deg); }
             100% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; transform: translate(-5%, 10%) rotate(10deg); }
         }
 
-        /* --- ПАРЯЩЕЕ СТЕКЛО (Premium Dark Glass) --- */
+        /* --- ПАРЯЩЕЕ СТЕКЛО --- */
         .glass-panel {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
             backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
             border: 1px solid var(--glassBorder);
             border-top: 1px solid var(--glassBorderHighlight);
             border-left: 1px solid var(--glassBorderHighlight);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8); /* Очень глубокая тень */
-            border-radius: 28px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            border-radius: 24px;
             transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
         }
         .glass-panel:hover {
@@ -81,35 +77,7 @@
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
 
-        @keyframes slideUpFade {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- ИНТЕРАКТИВНЫЙ ГРАФИК --- */
-        .chart-scroll-container { width: 100%; overflow-x: auto; padding-bottom: 10px; }
-        .bar-chart { display: flex; align-items: flex-end; gap: 16px; height: 220px; padding-top: 40px; position: relative; min-width: 500px; }
-        .bar-wrapper { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; position: relative; cursor: pointer; }
-        .bar { width: 100%; background: rgba(148, 163, 184, 0.08); border-radius: 6px 6px 4px 4px; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); border: 1px solid rgba(255,255,255,0.02); }
-        
-        .bar-wrapper:hover .bar { background: rgba(148, 163, 184, 0.15); transform: translateY(-2px); }
-        .bar-wrapper.active .bar { background: linear-gradient(180deg, #3B71CA 0%, rgba(59, 113, 202, 0.2) 100%); box-shadow: 0 10px 30px -5px rgba(59, 113, 202, 0.3); transform: translateY(-5px); border: 1px solid rgba(59, 113, 202, 0.4); }
-        
-        .bar-label-top { position: absolute; top: -25px; width: 100%; text-align: center; font-size: 12px; font-weight: 600; color: #94A3B8; transition: all 0.3s; }
-        .bar-label-bottom { position: absolute; bottom: -25px; width: 100%; text-align: center; font-size: 12px; font-weight: 600; color: #64748B; }
-        .bar-wrapper.active .bar-label-top { color: #3B71CA; top: -30px; text-shadow: 0 0 10px rgba(59, 113, 202, 0.3); }
-
-        /* Всплывающее окно графика */
-        #chart-tooltip {
-            position: absolute; top: -10px; left: 0;
-            pointer-events: none; opacity: 0; transition: opacity 0.3s ease, left 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 50;
-            width: 220px; margin-left: -110px;
-            background: rgba(15, 23, 42, 0.95); 
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
-            border-radius: 16px;
-        }
-        #chart-tooltip.visible { opacity: 1; top: -30px; }
+        @keyframes slideUpFade { to { opacity: 1; transform: translateY(0); } }
 
         /* Скроллбар */
         .scroll-area::-webkit-scrollbar { width: 4px; height: 4px; }
@@ -143,11 +111,14 @@
             <button data-target="tab-problem" class="nav-btn active-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-white/5 border border-white/5 shadow-sm text-textMain font-bold text-sm transition w-full text-left">
                 <i class="ph-fill ph-shield-warning text-xl text-accentGreen"></i> Проблема & Решение
             </button>
-            <button data-target="tab-product" class="nav-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 text-textMuted font-medium text-sm transition w-full text-left border border-transparent">
-                <i class="ph-fill ph-app-window text-xl"></i> Продукт & Тракция
+            <button data-target="tab-market" class="nav-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 text-textMuted font-medium text-sm transition w-full text-left border border-transparent">
+                <i class="ph-fill ph-chart-pie-slice text-xl"></i> Рынок & Конкуренты
+            </button>
+            <button data-target="tab-team" class="nav-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 text-textMuted font-medium text-sm transition w-full text-left border border-transparent">
+                <i class="ph-fill ph-users-three text-xl"></i> Команда & Roadmap
             </button>
             <button data-target="tab-finance" class="nav-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 text-textMuted font-medium text-sm transition w-full text-left border border-transparent">
-                <i class="ph-fill ph-trend-up text-xl"></i> Инвестиции & Рост
+                <i class="ph-fill ph-trend-up text-xl"></i> Финансы & Раунд
             </button>
         </nav>
 
@@ -161,11 +132,6 @@
                 Seed (Smart Money)
             </div>
         </div>
-        
-        <!-- Кнопка скачать для мобилок -->
-        <a href="https://docs.google.com/spreadsheets/d/11gcHDpwoYFIhdwOiPsD3ap7R_KBfMu-r/edit?usp=sharing&ouid=101884777253809193548&rtpof=true&sd=true" target="_blank" class="md:hidden px-4 py-2 rounded-full bg-accentGreen/10 border border-accentGreen/20 text-xs font-bold text-accentGreen flex items-center gap-2">
-            <i class="ph-fill ph-table"></i> Фин. Модель
-        </a>
     </aside>
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
@@ -173,7 +139,7 @@
         
         <header class="hidden md:flex justify-between items-center mb-6 px-2">
             <div class="flex items-center gap-4 text-sm font-medium text-textMuted">
-                <span class="bg-slate-800/40 px-4 py-2 rounded-full border border-white/5 shadow-sm">B2B2C SaaS / GovTech</span>
+                <span class="bg-slate-800/40 px-4 py-2 rounded-full border border-white/5 shadow-sm">B2B2C SaaS / HealthTech</span>
             </div>
             <a href="https://docs.google.com/spreadsheets/d/11gcHDpwoYFIhdwOiPsD3ap7R_KBfMu-r/edit?usp=sharing&ouid=101884777253809193548&rtpof=true&sd=true" target="_blank" class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-sm font-bold text-textMain hover:bg-white/10 transition flex items-center gap-2 backdrop-blur-md">
                 <i class="ph-fill ph-table text-lg text-accentGreen"></i> Открыть Фин. Модель
@@ -185,217 +151,270 @@
             <!-- ВКЛАДКА 1: ПРОБЛЕМА И РЕШЕНИЕ -->
             <div id="tab-problem" class="tab-content active">
                 <div class="mb-8 px-2 animate-item">
-                    <h2 class="text-4xl md:text-6xl font-black tracking-tight text-textMain mb-3">Монополия по закону.</h2>
-                    <p class="text-textMuted max-w-3xl text-base md:text-lg font-medium">Мы создаем инфраструктуру, которую рынок <strong class="text-accentGreen">обязан</strong> использовать.</p>
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-textMain mb-3">Экосистема, меняющая правила.</h2>
+                    <p class="text-textMuted max-w-3xl text-base md:text-lg font-medium">Мы объединили весь инструментарий психолога в одном окне, обеспечив <strong class="text-accentGreen">100% юридическую защиту</strong>.</p>
                 </div>
 
-                <div class="grid grid-cols-1 gap-6">
-                    <div class="glass-panel p-6 md:p-8 animate-item delay-1">
-                        <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-6">Глобальная миссия и проблематика</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="bg-slate-800/30 p-6 rounded-2xl border border-white/5">
-                                <i class="ph-fill ph-warning-circle text-4xl text-rose-400/80 mb-4"></i>
-                                <h4 class="font-bold text-textMain text-lg mb-2">Нарушение Закона РК</h4>
-                                <p class="text-sm text-textMuted leading-relaxed">Психологи ведут практику через зарубежные сервисы (Zoom, WhatsApp). Конфиденциальные мед. данные граждан РК хранятся на иностранных серверах, что незаконно.</p>
-                            </div>
-                            <div class="bg-slate-800/30 p-6 rounded-2xl border border-white/5">
-                                <i class="ph-fill ph-mask-sad text-4xl text-amber-500/80 mb-4"></i>
-                                <h4 class="font-bold text-textMain text-lg mb-2">Засилье «лжепсихологов»</h4>
-                                <p class="text-sm text-textMuted leading-relaxed">В стране нет единого цифрового реестра и механизма автоматической проверки квалификации, что ставит под угрозу ментальное здоровье населения.</p>
-                            </div>
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="glass-panel p-6 animate-item delay-1 border-t-2 border-t-slate-500/50">
+                        <div class="text-4xl font-black text-textMain mb-2">5-7</div>
+                        <p class="text-sm text-textMuted">Разных сервисов (Zoom, WA, Excel, банки) использует 1 психолог, теряя время и клиентов.</p>
                     </div>
+                    <div class="glass-panel p-6 animate-item delay-1 border-t-2 border-t-rose-500/50">
+                        <div class="text-4xl font-black text-textMain mb-2">Закон РК</div>
+                        <p class="text-sm text-textMuted">Хранение мед. данных в зарубежных мессенджерах незаконно. Рынок требует локального решения.</p>
+                    </div>
+                    <div class="glass-panel p-6 animate-item delay-1 border-t-2 border-t-amber-500/50">
+                        <div class="text-4xl font-black text-textMain mb-2">Тень</div>
+                        <p class="text-sm text-textMuted">Засилье «лжепсихологов» без образования уничтожает доверие к настоящим специалистам.</p>
+                    </div>
+                </div>
 
-                    <div class="glass-panel p-6 md:p-8 relative overflow-hidden animate-item delay-2">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="glass-panel p-6 lg:col-span-2 relative overflow-hidden animate-item delay-2">
                         <div class="absolute -right-20 -top-20 w-64 h-64 bg-accentGreen/10 rounded-full blur-[80px]"></div>
-                        <h3 class="text-xs font-bold text-accentGreen uppercase tracking-widest mb-6 relative z-10">Технологическая инновация (Суть решения)</h3>
-                        <p class="text-base text-textMain mb-8 max-w-3xl relative z-10 font-medium">PSYHUB — это единая легитимная цифровая экосистема (All-in-One) для комплексной автоматизации и комплаенса психологической практики в РК.</p>
+                        <h3 class="text-xs font-bold text-accentGreen uppercase tracking-widest mb-4 relative z-10">Решение: All-in-One Пространство</h3>
+                        <p class="text-base text-textMain mb-6 max-w-xl relative z-10">Psyhub — это не просто видеосвязь. Это полноценный кабинет, где автоматизирована вся рутина, а закон РК выступает нашим защитным рвом.</p>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-                            <div class="bg-white/5 p-5 rounded-2xl border border-white/5 hover:bg-white/10 transition">
-                                <div class="flex items-center gap-3 mb-3"><i class="ph-fill ph-database text-accentBlue text-2xl"></i> <h4 class="font-bold text-textMain">Data Compliance</h4></div>
-                                <p class="text-sm text-textMuted">Полная физическая локализация всей серверной архитектуры и баз данных (PostgreSQL) на территории РК.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 relative z-10">
+                            <div class="bg-white/5 p-4 rounded-xl border border-white/5">
+                                <i class="ph-fill ph-squares-four text-accentBlue text-xl mb-2"></i>
+                                <h4 class="font-bold text-textMain text-sm">Удобство</h4>
+                                <p class="text-xs text-textMuted mt-1">CRM, биллинг, календарь и МАК-карты в одном месте.</p>
                             </div>
-                            <div class="bg-white/5 p-5 rounded-2xl border border-white/5 hover:bg-white/10 transition">
-                                <div class="flex items-center gap-3 mb-3"><i class="ph-fill ph-bank text-accentGreen text-2xl"></i> <h4 class="font-bold text-textMain">GovTech-интеграция</h4></div>
-                                <p class="text-sm text-textMuted">Прямое защищенное API-взаимодействие с eGov / НОБД для автоматической валидации дипломов специалистов.</p>
+                            <div class="bg-white/5 p-4 rounded-xl border border-white/5">
+                                <i class="ph-fill ph-shield-check text-accentGreen text-xl mb-2"></i>
+                                <h4 class="font-bold text-textMain text-sm">Легальность</h4>
+                                <p class="text-xs text-textMuted mt-1">Сервера в РК. 100% Data Compliance.</p>
                             </div>
-                            <div class="bg-white/5 p-5 rounded-2xl border border-white/5 hover:bg-white/10 transition">
-                                <div class="flex items-center gap-3 mb-3"><i class="ph-fill ph-video-camera text-slate-400 text-2xl"></i> <h4 class="font-bold text-textMain">Свой WebRTC</h4></div>
-                                <p class="text-sm text-textMuted">Защищенная потоковая видеосвязь без посредников (P2P), гарантирующая абсолютную конфиденциальность.</p>
+                            <div class="bg-white/5 p-4 rounded-xl border border-white/5">
+                                <i class="ph-fill ph-bank text-slate-400 text-xl mb-2"></i>
+                                <h4 class="font-bold text-textMain text-sm">GovTech</h4>
+                                <p class="text-xs text-textMuted mt-1">Отсев шарлатанов через eGov-верификацию.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 animate-item delay-3 flex flex-col justify-center">
+                        <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-4">Тайминг проекта</h3>
+                        <div class="space-y-4">
+                            <div class="flex gap-3">
+                                <div class="w-2 h-2 rounded-full bg-accentGreen mt-1.5 shrink-0"></div>
+                                <div><h4 class="font-bold text-sm text-textMain">Q2 2026 (Сейчас)</h4><p class="text-xs text-textMuted">Успешный пилот. Подтвержденный спрос.</p></div>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="w-2 h-2 rounded-full bg-accentBlue mt-1.5 shrink-0"></div>
+                                <div><h4 class="font-bold text-sm text-textMain">Q3 2026</h4><p class="text-xs text-textMuted">Seed-раунд. Масштабирование и B2B.</p></div>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="w-2 h-2 rounded-full bg-slate-500 mt-1.5 shrink-0"></div>
+                                <div><h4 class="font-bold text-sm text-textMain">2027</h4><p class="text-xs text-textMuted">Ожидаемая обязательная сертификация телемед. сервисов.</p></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ВКЛАДКА 2: ПРОДУКТ -->
-            <div id="tab-product" class="tab-content">
+            <!-- ВКЛАДКА 2: РЫНОК И КОНКУРЕНТЫ -->
+            <div id="tab-market" class="tab-content">
                 <div class="mb-8 px-2 animate-item">
-                    <h2 class="text-4xl md:text-6xl font-black tracking-tight text-textMain mb-3">Продукт & Тракция.</h2>
-                    <p class="text-textMuted max-w-3xl text-base md:text-lg font-medium">MVP разработан (PWA). Спрос подтвержден документально.</p>
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-textMain mb-3">Свободная ниша.</h2>
+                    <p class="text-textMuted max-w-3xl text-base md:text-lg font-medium">Огромный рынок, который нуждается в легальном и удобном инструменте.</p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-                    
-                    <!-- Функционал -->
-                    <div class="lg:col-span-7 flex flex-col gap-4 animate-item delay-1">
-                        <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest px-2">Текущий функционал (MVP)</h3>
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
-                            <div class="glass-panel p-5 flex flex-col justify-center">
-                                <div class="w-10 h-10 rounded-full bg-accentBlue/10 flex items-center justify-center mb-3 border border-accentBlue/20">
-                                    <i class="ph-fill ph-video-camera text-accentBlue text-xl"></i>
-                                </div>
-                                <h4 class="font-bold text-textMain mb-1">Видеокомната</h4>
-                                <p class="text-xs text-textMuted">Защищенная P2P связь с трансляцией экрана.</p>
-                            </div>
-                            <div class="glass-panel p-5 flex flex-col justify-center">
-                                <div class="w-10 h-10 rounded-full bg-accentGreen/10 flex items-center justify-center mb-3 border border-accentGreen/20">
-                                    <i class="ph-fill ph-calendar text-accentGreen text-xl"></i>
-                                </div>
-                                <h4 class="font-bold text-textMain mb-1">Календарь</h4>
-                                <p class="text-xs text-textMuted">Интерактивное онлайн-расписание и авто-запись.</p>
-                            </div>
-                            <div class="glass-panel p-5 flex flex-col justify-center">
-                                <div class="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center mb-3 border border-amber-500/20">
-                                    <i class="ph-fill ph-chat-circle text-amber-500/80 text-xl"></i>
-                                </div>
-                                <h4 class="font-bold text-textMain mb-1">Корпоративный чат</h4>
-                                <p class="text-xs text-textMuted">Встроенное безопасное общение с клиентами.</p>
-                            </div>
-                            <div class="glass-panel p-5 flex flex-col justify-center">
-                                <div class="w-10 h-10 rounded-full bg-emerald-600/10 flex items-center justify-center mb-3 border border-emerald-600/20">
-                                    <i class="ph-fill ph-folder-user text-emerald-500 text-xl"></i>
-                                </div>
-                                <h4 class="font-bold text-textMain mb-1">Умная CRM</h4>
-                                <p class="text-xs text-textMuted">Цифровые карты клиентов и планировщик задач.</p>
-                            </div>
-                            <div class="glass-panel p-5 flex flex-col justify-center">
-                                <div class="w-10 h-10 rounded-full bg-indigo-400/10 flex items-center justify-center mb-3 border border-indigo-400/20">
-                                    <i class="ph-fill ph-brain text-indigo-400 text-xl"></i>
-                                </div>
-                                <h4 class="font-bold text-textMain mb-1">Цифровая терапия</h4>
-                                <p class="text-xs text-textMuted">Оценка состояния (шкалы) прямо во время звонка.</p>
-                            </div>
-                            <div class="glass-panel p-5 flex flex-col justify-center">
-                                <div class="w-10 h-10 rounded-full bg-slate-500/10 flex items-center justify-center mb-3 border border-slate-500/20">
-                                    <i class="ph-fill ph-article text-slate-400 text-xl"></i>
-                                </div>
-                                <h4 class="font-bold text-textMain mb-1">Анкеты и Лента</h4>
-                                <p class="text-xs text-textMuted">Конструктор анкет и публикация постов.</p>
-                            </div>
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="glass-panel p-6 text-center animate-item delay-1">
+                        <p class="text-xs text-textMuted font-bold uppercase tracking-widest mb-2">TAM (Общий рынок)</p>
+                        <div class="text-3xl font-black text-textMain mb-2">~15 млрд ₸</div>
+                        <p class="text-xs text-textMuted">Все психологи и центры ментального здоровья в РК.</p>
                     </div>
+                    <div class="glass-panel p-6 text-center border border-accentGreen/30 bg-accentGreen/5 animate-item delay-1">
+                        <p class="text-xs text-accentGreen font-bold uppercase tracking-widest mb-2">SAM (Доступный рынок)</p>
+                        <div class="text-3xl font-black text-accentGreen mb-2">~4.5 млрд ₸</div>
+                        <p class="text-xs text-textMuted">Специалисты, обязанные соблюдать закон о ПД.</p>
+                    </div>
+                    <div class="glass-panel p-6 text-center animate-item delay-1">
+                        <p class="text-xs text-textMuted font-bold uppercase tracking-widest mb-2">SOM (Целевой охват 3 года)</p>
+                        <div class="text-3xl font-black text-textMain mb-2">~800 млн ₸</div>
+                        <p class="text-xs text-textMuted">Реалистичный план захвата доли рынка через B2B и B2C.</p>
+                    </div>
+                </div>
 
-                    <!-- Тракция -->
-                    <div class="lg:col-span-5 flex flex-col gap-4 animate-item delay-2 h-full">
-                        <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest px-2">Подтвержденный спрос</h3>
-                        <div class="glass-panel p-6 md:p-8 flex flex-col h-full relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-accentGreen/5 to-transparent pointer-events-none"></div>
-                            
-                            <ul class="space-y-5 mb-auto relative z-10">
-                                <li class="flex items-start gap-4">
-                                    <div class="w-6 h-6 rounded-full bg-accentGreen/20 flex items-center justify-center shrink-0 mt-0.5"><i class="ph-bold ph-check text-accentGreen text-xs"></i></div>
-                                    <span class="text-sm text-textMain leading-relaxed">Глубокий CustDev и UX/UI тестирование с фокус-группами.</span>
-                                </li>
-                                <li class="flex items-start gap-4">
-                                    <div class="w-6 h-6 rounded-full bg-accentGreen/20 flex items-center justify-center shrink-0 mt-0.5"><i class="ph-bold ph-check text-accentGreen text-xs"></i></div>
-                                    <span class="text-sm text-textMain leading-relaxed">Заключены соглашения о тестировании с <strong class="text-white">10+ специалистами</strong>.</span>
-                                </li>
-                                <li class="flex items-start gap-4">
-                                    <div class="w-6 h-6 rounded-full bg-accentBlue/20 flex items-center justify-center shrink-0 mt-0.5"><i class="ph-bold ph-file-text text-accentBlue text-xs"></i></div>
-                                    <span class="text-sm text-textMain leading-relaxed">Официальное соглашение с ЧУ Психологический центр «Мое возрождение» (Астана).</span>
-                                </li>
-                            </ul>
-                            
-                            <div class="flex gap-3 h-28 mt-8 relative z-10">
-                                <div class="flex-1 bg-slate-800 rounded-xl bg-cover bg-center border border-white/5 shadow-lg" style="background-image: url('https://i.ibb.co/QvLfDL9v/image.jpg');"></div>
-                                <div class="flex-1 bg-slate-800 rounded-xl bg-cover bg-center border border-white/5 shadow-lg" style="background-image: url('https://i.ibb.co/fV3Tgbkj/image.jpg');"></div>
-                                <div class="flex-1 bg-slate-800 rounded-xl bg-cover bg-center border border-white/5 shadow-lg" style="background-image: url('https://i.ibb.co/N2ctcPZN/image.jpg');"></div>
-                            </div>
+                <div class="glass-panel p-6 md:p-8 animate-item delay-2 overflow-x-auto">
+                    <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-6">Конкурентное преимущество</h3>
+                    <table class="w-full text-left min-w-[600px]">
+                        <thead>
+                            <tr class="border-b border-white/10 text-xs text-textMuted uppercase tracking-wider">
+                                <th class="py-3 px-4 font-medium">Критерий</th>
+                                <th class="py-3 px-4 font-bold text-accentGreen bg-white/5 rounded-t-lg">Psyhub</th>
+                                <th class="py-3 px-4 font-medium">Zoom / WA</th>
+                                <th class="py-3 px-4 font-medium">B17 / Alter (РФ)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm text-textMain">
+                            <tr class="border-b border-white/5">
+                                <td class="py-4 px-4">Встроенная CRM и Биллинг</td>
+                                <td class="py-4 px-4 bg-white/5"><i class="ph-fill ph-check-circle text-accentGreen text-xl"></i></td>
+                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
+                                <td class="py-4 px-4"><i class="ph-fill ph-warning-circle text-amber-500 text-xl"></i></td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="py-4 px-4">МАК-карты и Тестирование</td>
+                                <td class="py-4 px-4 bg-white/5"><i class="ph-fill ph-check-circle text-accentGreen text-xl"></i></td>
+                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
+                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="py-4 px-4">Сервера в РК (Закон о ПД)</td>
+                                <td class="py-4 px-4 bg-white/5"><i class="ph-fill ph-check-circle text-accentGreen text-xl"></i></td>
+                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
+                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4">eGov верификация диплома</td>
+                                <td class="py-4 px-4 bg-white/5 rounded-b-lg"><i class="ph-fill ph-check-circle text-accentGreen text-xl"></i></td>
+                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
+                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ВКЛАДКА 3: КОМАНДА И ROADMAP -->
+            <div id="tab-team" class="tab-content">
+                <div class="mb-8 px-2 animate-item">
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-textMain mb-3">Execution.</h2>
+                    <p class="text-textMuted max-w-3xl text-base md:text-lg font-medium">Команда с экспертизой в IT, психологии и B2B продажах.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="glass-panel p-5 text-center animate-item delay-1">
+                        <div class="w-16 h-16 mx-auto bg-slate-800 rounded-full mb-3 flex items-center justify-center text-xl font-bold text-textMuted border border-white/10">НУ</div>
+                        <h3 class="font-bold text-textMain text-sm">Нурлыбек Усеров</h3>
+                        <p class="text-accentGreen text-xs font-bold mb-2">CEO & Founder, Dev</p>
+                        <p class="text-[11px] text-textMuted text-left leading-relaxed">Опыт создания IT-проектов. Участник Astana Hub Garage. Full-stack разработка.</p>
+                    </div>
+                    <div class="glass-panel p-5 text-center animate-item delay-1">
+                        <div class="w-16 h-16 mx-auto bg-slate-800 rounded-full mb-3 flex items-center justify-center text-xl font-bold text-textMuted border border-white/10">МН</div>
+                        <h3 class="font-bold text-textMain text-sm">Мурат Нурсеитов</h3>
+                        <p class="text-accentBlue text-xs font-bold mb-2">Бизнес-аналитик</p>
+                        <p class="text-[11px] text-textMuted text-left leading-relaxed">5+ лет опыта в создании проектов и выстраивании моделей монетизации.</p>
+                    </div>
+                    <div class="glass-panel p-5 text-center animate-item delay-1">
+                        <div class="w-16 h-16 mx-auto bg-slate-800 rounded-full mb-3 flex items-center justify-center text-xl font-bold text-textMuted border border-white/10">АЮ</div>
+                        <h3 class="font-bold text-textMain text-sm">Альвина Юсупова</h3>
+                        <p class="text-purple-400 text-xs font-bold mb-2">Психолог-эксперт</p>
+                        <p class="text-[11px] text-textMuted text-left leading-relaxed">Практикующий психолог с опытом более 20 лет. Отвечает за методологию и CustDev.</p>
+                    </div>
+                    <div class="glass-panel p-5 text-center animate-item delay-1">
+                        <div class="w-16 h-16 mx-auto bg-slate-800 rounded-full mb-3 flex items-center justify-center text-xl font-bold text-textMuted border border-white/10">ДМ</div>
+                        <h3 class="font-bold text-textMain text-sm">Дархан Маратович</h3>
+                        <p class="text-amber-500 text-xs font-bold mb-2">Legal & Партнерства</p>
+                        <p class="text-[11px] text-textMuted text-left leading-relaxed">10+ лет опыта ведения сложных переговоров, B2B продаж и юр. документации.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 md:p-8 animate-item delay-2">
+                    <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-6">Дорожная карта (Ближайшие шаги)</h3>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 items-center bg-white/5 p-3 rounded-xl border border-white/5">
+                            <div class="w-20 text-right font-bold text-accentGreen text-sm shrink-0">Q2 2026</div>
+                            <div class="w-2 h-2 rounded-full bg-accentGreen shrink-0"></div>
+                            <p class="text-sm text-textMain">Завершение пилота (PWA). Успешный CustDev. Подписание договоров с клиниками.</p>
+                        </div>
+                        <div class="flex gap-4 items-center bg-white/5 p-3 rounded-xl border border-white/5">
+                            <div class="w-20 text-right font-bold text-textMuted text-sm shrink-0">Q3 2026</div>
+                            <div class="w-2 h-2 rounded-full bg-slate-600 shrink-0"></div>
+                            <p class="text-sm text-textMain">Привлечение Seed-раунда. Перепланировка архитектуры под HighLoad. Интеграция eGov.</p>
+                        </div>
+                        <div class="flex gap-4 items-center bg-white/5 p-3 rounded-xl border border-white/5">
+                            <div class="w-20 text-right font-bold text-textMuted text-sm shrink-0">Q1 2027</div>
+                            <div class="w-2 h-2 rounded-full bg-slate-600 shrink-0"></div>
+                            <p class="text-sm text-textMain">Полноценный запуск B2B-модуля для клиник. Агрессивный маркетинг.</p>
+                        </div>
+                        <div class="flex gap-4 items-center bg-white/5 p-3 rounded-xl border border-white/5">
+                            <div class="w-20 text-right font-bold text-textMuted text-sm shrink-0">Q3 2027</div>
+                            <div class="w-2 h-2 rounded-full bg-slate-600 shrink-0"></div>
+                            <p class="text-sm text-textMain">500+ платящих специалистов. Выход на операционную окупаемость.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ВКЛАДКА 3: ИНВЕСТИЦИИ -->
+            <!-- ВКЛАДКА 4: ФИНАНСЫ И ИНВЕСТИЦИИ -->
             <div id="tab-finance" class="tab-content">
                 <div class="mb-8 px-2 animate-item">
-                    <h2 class="text-4xl md:text-6xl font-black tracking-tight text-textMain mb-3">Инвестиции & Рост.</h2>
-                    <p class="text-textMuted max-w-3xl text-base md:text-lg font-medium">Высокомаржинальная SaaS модель с геометрическим ростом.</p>
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-textMain mb-3">Unit-экономика и Раунд.</h2>
+                    <p class="text-textMuted max-w-3xl text-base md:text-lg font-medium">Понятная монетизация и четкий план использования средств.</p>
                 </div>
 
-                <div class="grid grid-cols-1 gap-6">
-                    
-                    <div class="glass-panel p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden animate-item delay-1">
-                        <div class="absolute -right-20 -top-20 w-64 h-64 bg-accentGreen/10 rounded-full blur-[80px]"></div>
-                        <div class="relative z-10">
-                            <h3 class="text-xs font-bold text-accentGreen uppercase tracking-widest mb-2">Seed-Раунд (Smart Money)</h3>
-                            <div class="text-4xl md:text-5xl font-black text-textMain">17.1 млн ₸</div>
-                            <p class="text-sm text-textMuted mt-3 max-w-md leading-relaxed">Инвестиции направляются на агрессивный маркетинг, захват рынка и доработку B2B функционала. Доля инвестора обсуждается индивидуально.</p>
-                        </div>
-                        <div class="relative z-10 flex w-full md:w-auto gap-4 md:gap-6">
-                            <div class="flex-1 bg-slate-900/50 p-4 md:p-5 rounded-2xl border border-white/5 backdrop-blur-md">
-                                <p class="text-[10px] md:text-xs text-textMuted uppercase mb-1 font-bold">Окупаемость</p>
-                                <p class="text-xl md:text-2xl font-black text-accentGreen">15-й месяц</p>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+                    <div class="lg:col-span-7 glass-panel p-6 md:p-8 animate-item delay-1">
+                        <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-6">Бизнес-модель</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="bg-white/5 p-4 rounded-xl border border-white/5">
+                                <h4 class="font-bold text-textMain text-sm mb-2 border-b border-white/10 pb-2">Транзакция (B2C)</h4>
+                                <div class="text-2xl font-black text-accentGreen mb-1">10%</div>
+                                <p class="text-xs text-textMuted">Комиссия с сессий. Лимит: не более 3000 ₸.</p>
                             </div>
-                            <div class="flex-1 bg-slate-900/50 p-4 md:p-5 rounded-2xl border border-white/5 backdrop-blur-md">
-                                <p class="text-[10px] md:text-xs text-textMuted uppercase mb-1 font-bold">Unit-экономика</p>
-                                <p class="text-xl md:text-2xl font-black text-accentBlue">~10% <span class="text-sm font-medium text-textMuted">(до 3000₸)</span></p>
+                            <div class="bg-white/5 p-4 rounded-xl border border-white/5">
+                                <h4 class="font-bold text-textMain text-sm mb-2 border-b border-white/10 pb-2">Подписка (Pro)</h4>
+                                <div class="text-2xl font-black text-textMain mb-1">~50k ₸<span class="text-xs text-textMuted">/мес</span></div>
+                                <p class="text-xs text-textMuted">Продвинутая аналитика, безлимит инструментов.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-xl border border-white/5">
+                                <h4 class="font-bold text-textMain text-sm mb-2 border-b border-white/10 pb-2">Enterprise (B2B)</h4>
+                                <div class="text-2xl font-black text-textMain mb-1">~99k ₸<span class="text-xs text-textMuted">/мес</span></div>
+                                <p class="text-xs text-textMuted">Пакет для клиник. Управление штатом.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="glass-panel p-6 md:p-8 relative animate-item delay-2">
-                        <div class="flex flex-col md:flex-row justify-between items-start mb-8 gap-4">
+                    <div class="lg:col-span-5 glass-panel p-6 md:p-8 animate-item delay-1">
+                        <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-6">Метрики (Прогноз 12 мес)</h3>
+                        <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-2">Финансовый прогноз (5 лет)</h3>
-                                <div class="text-2xl md:text-3xl font-bold text-textMain">Геометрический рост за счет монополии</div>
+                                <p class="text-[10px] text-textMuted uppercase mb-1">Целевой CAC</p>
+                                <div class="text-xl font-bold text-textMain">~5 000 ₸</div>
                             </div>
-                            <div class="text-[10px] md:text-xs font-bold text-accentGreen bg-accentGreen/10 px-4 py-2 rounded-xl border border-accentGreen/20 animate-pulse">
-                                Нажмите на столбик для деталей
+                            <div>
+                                <p class="text-[10px] text-textMuted uppercase mb-1">Целевой LTV</p>
+                                <div class="text-xl font-bold text-textMain">~45 000 ₸</div>
                             </div>
-                        </div>
-                        
-                        <div id="chart-tooltip" class="p-4">
-                            <h4 id="tt-year" class="font-bold text-textMain border-b border-white/5 pb-2 mb-3 text-sm">Год</h4>
-                            <div class="flex justify-between text-sm mb-2"><span class="text-textMuted">Выручка:</span> <span id="tt-rev" class="font-bold text-accentGreen">0</span></div>
-                            <div class="flex justify-between text-sm mb-2"><span class="text-textMuted">Расходы:</span> <span id="tt-exp" class="font-bold text-rose-400/80">0</span></div>
-                            <div class="flex justify-between text-sm mt-3 pt-3 border-t border-white/5"><span class="text-textMuted">Транзакции:</span> <span id="tt-clients" class="font-bold text-textMain">0</span></div>
-                        </div>
-
-                        <div class="chart-scroll-container">
-                            <div class="bar-chart" id="finance-chart">
-                                <div class="bar-wrapper" data-year="Год 1 (Запуск)" data-rev="13.5 млн ₸" data-exp="35.0 млн ₸" data-clients="~4,500 сессий">
-                                    <div class="bar" style="height: 10%;"></div>
-                                    <div class="bar-label-top">13.5M</div>
-                                    <div class="bar-label-bottom">Год 1</div>
-                                </div>
-                                <div class="bar-wrapper" data-year="Год 2 (Окупаемость)" data-rev="90.0 млн ₸" data-exp="30.0 млн ₸" data-clients="~30,000 сессий">
-                                    <div class="bar" style="height: 25%;"></div>
-                                    <div class="bar-label-top">90M</div>
-                                    <div class="bar-label-bottom">Год 2</div>
-                                </div>
-                                <div class="bar-wrapper" data-year="Год 3 (Масштабирование)" data-rev="210.0 млн ₸" data-exp="50.0 млн ₸" data-clients="~70,000 сессий">
-                                    <div class="bar" style="height: 45%;"></div>
-                                    <div class="bar-label-top">210M</div>
-                                    <div class="bar-label-bottom">Год 3</div>
-                                </div>
-                                <div class="bar-wrapper" data-year="Год 4 (B2B Клиники)" data-rev="375.0 млн ₸" data-exp="70.0 млн ₸" data-clients="~125,000 сессий">
-                                    <div class="bar" style="height: 70%;"></div>
-                                    <div class="bar-label-top">375M</div>
-                                    <div class="bar-label-bottom">Год 4</div>
-                                </div>
-                                <div class="bar-wrapper active" data-year="Год 5 (Захват рынка)" data-rev="540.0 млн ₸" data-exp="90.0 млн ₸" data-clients="~180,000 сессий">
-                                    <div class="bar active" style="height: 100%;"></div>
-                                    <div class="bar-label-top">540M</div>
-                                    <div class="bar-label-bottom">Год 5</div>
-                                </div>
+                            <div>
+                                <p class="text-[10px] text-textMuted uppercase mb-1">Конверсия (Пилот)</p>
+                                <div class="text-xl font-bold text-textMain">20%</div>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-accentGreen uppercase mb-1">Target MRR</p>
+                                <div class="text-xl font-bold text-accentGreen">~7.5 млн ₸</div>
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div class="glass-panel p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden animate-item delay-2">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-accentBlue/20 rounded-full blur-[80px]"></div>
+                    
+                    <div class="relative z-10 flex-1">
+                        <h3 class="text-xs font-bold text-accentBlue uppercase tracking-widest mb-2">Инвестиционное предложение</h3>
+                        <div class="text-4xl md:text-5xl font-black text-textMain mb-2">17 100 000 ₸</div>
+                        <p class="text-sm text-textMuted mb-6">Привлекаем за X% доли (Seed). Pre-money оценка обсуждается.</p>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3"><div class="w-3 h-3 bg-accentGreen rounded-sm"></div> <span class="text-sm text-textMain">40% — Доработка продукта (B2B, eGov)</span></div>
+                            <div class="flex items-center gap-3"><div class="w-3 h-3 bg-accentBlue rounded-sm"></div> <span class="text-sm text-textMain">40% — Маркетинг и продажи (CAC)</span></div>
+                            <div class="flex items-center gap-3"><div class="w-3 h-3 bg-slate-500 rounded-sm"></div> <span class="text-sm text-textMain">20% — Операционные расходы (Сервера, Legal)</span></div>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 bg-white/5 p-6 rounded-2xl border border-white/10 text-center w-full md:w-64 shrink-0">
+                        <h3 class="font-bold text-textMain mb-4">Контакты фаундера</h3>
+                        <p class="text-sm text-textMuted mb-1">Нурлыбек Усеров</p>
+                        <p class="text-sm text-white mb-1">+7 (XXX) XXX-XX-XX</p>
+                        <p class="text-sm text-accentGreen">founder@psyhub.kz</p>
+                    </div>
                 </div>
             </div>
 
@@ -404,13 +423,17 @@
 
     <!-- МОБИЛЬНАЯ НИЖНЯЯ НАВИГАЦИЯ -->
     <nav class="md:hidden fixed bottom-4 left-4 right-4 glass-panel p-2 flex justify-between z-50 nav-menu">
-        <button data-target="tab-problem" class="nav-btn active-btn flex-1 flex flex-col items-center gap-1 p-2 rounded-xl bg-white/5 text-accentGreen transition">
+        <button data-target="tab-problem" class="nav-btn active-btn flex-1 flex flex-col items-center gap-1 p-2 rounded-xl bg-white/10 text-accentGreen transition">
             <i class="ph-fill ph-shield-warning text-xl"></i>
             <span class="text-[10px] font-bold">Проблема</span>
         </button>
-        <button data-target="tab-product" class="nav-btn flex-1 flex flex-col items-center gap-1 p-2 rounded-xl text-textMuted transition">
-            <i class="ph-fill ph-app-window text-xl"></i>
-            <span class="text-[10px] font-bold">Продукт</span>
+        <button data-target="tab-market" class="nav-btn flex-1 flex flex-col items-center gap-1 p-2 rounded-xl text-textMuted transition">
+            <i class="ph-fill ph-chart-pie-slice text-xl"></i>
+            <span class="text-[10px] font-bold">Рынок</span>
+        </button>
+        <button data-target="tab-team" class="nav-btn flex-1 flex flex-col items-center gap-1 p-2 rounded-xl text-textMuted transition">
+            <i class="ph-fill ph-users-three text-xl"></i>
+            <span class="text-[10px] font-bold">Команда</span>
         </button>
         <button data-target="tab-finance" class="nav-btn flex-1 flex flex-col items-center gap-1 p-2 rounded-xl text-textMuted transition">
             <i class="ph-fill ph-trend-up text-xl"></i>
@@ -433,11 +456,16 @@
                     const targetId = btn.getAttribute('data-target');
 
                     navBtns.forEach(b => {
-                        b.classList.remove('bg-white/5', 'text-accentGreen', 'border-white/5', 'shadow-sm');
+                        b.classList.remove('bg-white/5', 'bg-white/10', 'text-accentGreen', 'border-white/5', 'shadow-sm', 'text-textMain');
                         b.classList.add('text-textMuted', 'border-transparent');
+                        
                         if(b.getAttribute('data-target') === targetId) {
                             b.classList.remove('text-textMuted', 'border-transparent');
-                            b.classList.add('bg-white/5', 'text-accentGreen', 'border-white/5', 'shadow-sm');
+                            if(window.innerWidth >= 768) {
+                                b.classList.add('bg-white/5', 'text-textMain', 'border-white/5', 'shadow-sm');
+                            } else {
+                                b.classList.add('bg-white/10', 'text-accentGreen');
+                            }
                         }
                     });
 
@@ -451,44 +479,6 @@
                         });
                     });
                     document.getElementById(targetId).classList.add('active');
-                });
-            });
-
-            const bars = document.querySelectorAll('.bar-wrapper');
-            const tooltip = document.getElementById('chart-tooltip');
-            const chartContainer = document.getElementById('finance-chart');
-
-            const updateTooltip = (bar) => {
-                document.getElementById('tt-year').textContent = bar.dataset.year;
-                document.getElementById('tt-rev').textContent = bar.dataset.rev;
-                document.getElementById('tt-exp').textContent = bar.dataset.exp;
-                document.getElementById('tt-clients').textContent = bar.dataset.clients;
-
-                const barRect = bar.getBoundingClientRect();
-                const containerRect = chartContainer.getBoundingClientRect();
-                
-                let leftPos = barRect.left - containerRect.left + (barRect.width / 2);
-                
-                const tooltipHalfWidth = 110; 
-                if (leftPos < tooltipHalfWidth) leftPos = tooltipHalfWidth;
-                if (leftPos > containerRect.width - tooltipHalfWidth) leftPos = containerRect.width - tooltipHalfWidth;
-                
-                tooltip.style.left = `${leftPos}px`;
-                tooltip.classList.add('visible');
-            };
-
-            const defaultActiveBar = document.querySelector('.bar-wrapper.active');
-            if(defaultActiveBar) updateTooltip(defaultActiveBar);
-
-            bars.forEach(bar => {
-                bar.addEventListener('click', () => {
-                    bars.forEach(b => {
-                        b.classList.remove('active');
-                        b.querySelector('.bar').classList.remove('active');
-                    });
-                    bar.classList.add('active');
-                    bar.querySelector('.bar').classList.add('active');
-                    updateTooltip(bar);
                 });
             });
         });
