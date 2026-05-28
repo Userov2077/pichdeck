@@ -290,10 +290,21 @@
             .mob-btn.active { color: var(--green); }
 
             /* grid overrides */
-            .g3, .g4 { grid-template-columns: 1fr; }
+            .g3 { grid-template-columns: 1fr; }
+            .g4 { grid-template-columns: 1fr 1fr; }
             .g2 { grid-template-columns: 1fr; }
             .span2 { grid-column: span 1; }
             .sol-grid { grid-template-columns: 1fr; }
+
+            /* Problem tab bottom row: solution + timeline side by side */
+            .problem-bottom { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+            .problem-bottom .solution-card { padding: 14px; }
+            .problem-bottom .solution-card p { font-size: 12px; }
+            .problem-bottom .sol-grid { grid-template-columns: 1fr !important; gap: 8px; margin-top: 12px; }
+            .problem-bottom .sol-item { padding: 10px; }
+            .problem-bottom .tl-card { padding: 14px; }
+            .problem-bottom .tl-t { font-size: 11px; }
+            .problem-bottom .span2 { grid-column: span 1 !important; }
 
             .section-head h2 { font-size: 26px; }
         }
@@ -395,7 +406,7 @@
                     </div>
                 </div>
 
-                <div class="g3" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:0;">
+                <div class="g3 problem-bottom" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:0;">
                     <!-- solution spans 2 cols on desktop -->
                     <div class="card solution-card span2" style="grid-column:span 2;">
                         <div class="sol-glow"></div>
