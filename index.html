@@ -2,486 +2,706 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Psyhub | Premium Investor Deck</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Urbanist', 'sans-serif'] },
-                    colors: {
-                        darkBg: '#0A0F14',
-                        glassBorder: 'rgba(255, 255, 255, 0.03)',
-                        glassBorderHighlight: 'rgba(255, 255, 255, 0.08)',
-                        accentGreen: '#2EA071', 
-                        accentBlue: '#3B71CA',  
-                        textMain: '#E2E8F0',
-                        textMuted: '#94A3B8'
-                    }
-                }
-            }
-        }
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Psyhub | Investor Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        body { background-color: #0A0F14; color: #E2E8F0; overflow: hidden; }
-
-        /* --- ЭЛЕГАНТНЫЙ ЖИДКИЙ ФОН --- */
-        .liquid-bg { 
-            position: fixed; top: -10%; left: -10%; width: 120vw; height: 120vh; z-index: -1; 
-            background: #0A0F14;
-            transition: transform 2.5s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .liquid-blob {
-            position: absolute; filter: blur(120px); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            animation: morph 15s ease-in-out infinite alternate; opacity: 0.5;
-        }
-        .blob-1 { top: 0%; left: 0%; width: 55vw; height: 55vw; background: #0F4C3A; } 
-        .blob-2 { bottom: -10%; right: -10%; width: 65vw; height: 65vw; background: #163C7A; animation-delay: -5s; } 
-        .blob-3 { top: 20%; left: 30%; width: 45vw; height: 45vw; background: #1E293B; animation-delay: -10s; opacity: 0.6; } 
-
-        @keyframes morph {
-            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: translate(0, 0) rotate(0deg); }
-            100% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; transform: translate(-5%, 10%) rotate(10deg); }
+        :root {
+            --green: #2EA071;
+            --green-dim: rgba(46,160,113,0.15);
+            --green-glow: rgba(46,160,113,0.25);
+            --blue: #3E72C9;
+            --blue-dim: rgba(62,114,201,0.15);
+            --bg: #080D12;
+            --surface: rgba(18,26,38,0.75);
+            --surface-hover: rgba(24,34,50,0.85);
+            --border: rgba(255,255,255,0.07);
+            --border-hi: rgba(255,255,255,0.12);
+            --text: #E8EDF3;
+            --muted: #7A8A9E;
+            --muted2: #4E5C6E;
         }
 
-        /* --- ПАРЯЩЕЕ СТЕКЛО --- */
-        .glass-panel {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
-            backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-            border: 1px solid var(--glassBorder);
-            border-top: 1px solid var(--glassBorderHighlight);
-            border-left: 1px solid var(--glassBorderHighlight);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-            border-radius: 24px;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
-        }
-        .glass-panel:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.9);
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.7) 100%);
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            height: 100dvh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* --- КАСКАДНАЯ АНИМАЦИЯ --- */
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        
-        .animate-item { opacity: 0; transform: translateY(15px); }
-        .tab-content.active .animate-item { animation: slideUpFade 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
+        /* ─── AURORA BG ─── */
+        .aurora {
+            position: fixed;
+            inset: -20%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .aurora-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(130px);
+            animation: drift 18s ease-in-out infinite alternate;
+        }
+        .ab1 { width: 60vw; height: 60vw; top: -5%; left: -10%; background: radial-gradient(circle, #0D3D2E 0%, transparent 70%); opacity: 0.9; }
+        .ab2 { width: 70vw; height: 70vw; bottom: -20%; right: -15%; background: radial-gradient(circle, #102A5C 0%, transparent 70%); opacity: 0.8; animation-delay: -7s; }
+        .ab3 { width: 40vw; height: 40vw; top: 30%; left: 25%; background: radial-gradient(circle, #0D1F35 0%, transparent 70%); opacity: 0.7; animation-delay: -12s; }
+        @keyframes drift {
+            0% { transform: translate(0,0) scale(1); }
+            100% { transform: translate(3%, 5%) scale(1.05); }
+        }
 
-        @keyframes slideUpFade { to { opacity: 1; transform: translateY(0); } }
+        /* ─── LAYOUT ─── */
+        .app {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100dvh;
+            overflow: hidden;
+        }
 
-        /* Скроллбар */
-        .scroll-area::-webkit-scrollbar { width: 4px; height: 4px; }
-        .scroll-area::-webkit-scrollbar-track { background: transparent; }
-        .scroll-area::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.2); border-radius: 10px; }
+        /* ─── HEADER ─── */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(8,13,18,0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            flex-shrink: 0;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--green), #1a6b4a);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px var(--green-glow);
+            font-size: 18px;
+        }
+        .logo-text h1 { font-size: 17px; font-weight: 800; letter-spacing: 0.05em; color: var(--text); }
+        .logo-text span { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            background: rgba(255,255,255,0.03);
+        }
+        .seed-badge {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(46,160,113,0.3);
+            background: var(--green-dim);
+            color: var(--green);
+        }
+        .seed-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 6px var(--green);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.4; } }
+
+        .fin-btn {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-hi);
+            background: rgba(255,255,255,0.05);
+            color: var(--text);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .fin-btn:hover { background: rgba(255,255,255,0.1); }
+        .fin-btn svg { color: var(--green); }
+
+        /* ─── NAV TABS ─── */
+        .nav-tabs {
+            display: flex;
+            gap: 4px;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(8,13,18,0.4);
+            backdrop-filter: blur(10px);
+            flex-shrink: 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .nav-tabs::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            display: flex; align-items: center; gap: 7px;
+            padding: 7px 14px;
+            border-radius: 10px;
+            font-size: 12px; font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            border: none; background: transparent;
+            white-space: nowrap;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+        .tab-btn.active { color: var(--text); background: rgba(255,255,255,0.08); border: 1px solid var(--border); }
+        .tab-btn.active .tab-icon { color: var(--green); }
+        .tab-icon { font-size: 15px; }
+
+        /* ─── CONTENT ─── */
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.1) transparent;
+        }
+        .content-area::-webkit-scrollbar { width: 3px; }
+        .content-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 10px; }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+        @keyframes fadeUp { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+        /* ─── GLASS CARD ─── */
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--border);
+            border-top-color: var(--border-hi);
+            border-radius: 18px;
+            transition: all 0.3s cubic-bezier(0.25,1,0.5,1);
+        }
+        .card:hover { background: var(--surface-hover); border-color: var(--border-hi); transform: translateY(-2px); }
+
+        /* ─── GRID HELPERS ─── */
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+        .col-span-2 { grid-column: span 2; }
+
+        /* ─── SECTION HEADING ─── */
+        .section-head { margin-bottom: 22px; }
+        .section-head h2 { font-size: clamp(26px,5vw,40px); font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; }
+        .section-head p { font-size: 14px; color: var(--muted); margin-top: 6px; max-width: 560px; line-height: 1.6; }
+
+        /* ─── STAT CARDS ─── */
+        .stat-card { padding: 20px; position: relative; overflow: hidden; }
+        .stat-card .stat-accent { height: 2px; border-radius: 2px; margin-bottom: 14px; width: 36px; }
+        .stat-card .stat-value { font-size: 32px; font-weight: 900; letter-spacing: -0.02em; margin-bottom: 6px; }
+        .stat-card .stat-label { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+        /* ─── SOLUTION CARD ─── */
+        .solution-card { padding: 24px; position: relative; overflow: hidden; }
+        .solution-card .glow {
+            position: absolute; right: -60px; top: -60px;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, var(--green-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .solution-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 18px; }
+        .sol-item { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+        .sol-item .sol-icon { font-size: 20px; margin-bottom: 8px; }
+        .sol-item h4 { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+        .sol-item p { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+        /* ─── TIMELINE ─── */
+        .timeline-card { padding: 24px; }
+        .tl-item { display: flex; gap: 12px; padding: 10px 0; }
+        .tl-item + .tl-item { border-top: 1px solid var(--border); }
+        .tl-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+        .tl-dot.active { background: var(--green); box-shadow: 0 0 8px var(--green); }
+        .tl-dot.blue { background: var(--blue); }
+        .tl-dot.gray { background: var(--muted2); }
+        .tl-label { font-size: 11px; font-weight: 700; color: var(--green); margin-bottom: 2px; }
+        .tl-label.blue { color: var(--blue); }
+        .tl-label.gray { color: var(--muted); }
+        .tl-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+        /* ─── MARKET CARDS ─── */
+        .market-card { padding: 22px; text-align: center; }
+        .market-label { font-size: 9px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+        .market-value { font-size: 26px; font-weight: 900; margin-bottom: 6px; }
+        .market-desc { font-size: 11px; color: var(--muted); line-height: 1.4; }
+        .market-card.featured { border-color: rgba(46,160,113,0.3); background: rgba(46,160,113,0.06); }
+        .market-card.featured .market-value { color: var(--green); }
+        .market-card.featured .market-label { color: var(--green); }
+
+        /* ─── TABLE ─── */
+        .comp-table-wrap { padding: 24px; overflow-x: auto; }
+        .comp-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; min-width: 460px; }
+        .comp-table th { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .comp-table th.hl { background: rgba(46,160,113,0.07); color: var(--green); border-radius: 8px 8px 0 0; }
+        .comp-table td { padding: 13px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 12px; color: var(--text); vertical-align: middle; }
+        .comp-table td.hl { background: rgba(46,160,113,0.05); }
+        .comp-table tr:last-child td { border-bottom: none; }
+        .check { color: var(--green); font-size: 18px; }
+        .cross { color: #E25454; font-size: 18px; }
+        .partial { color: #E0A020; font-size: 18px; }
+
+        /* ─── TEAM ─── */
+        .team-card { padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .avatar {
+            width: 56px; height: 56px; border-radius: 16px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border-hi);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 800; color: var(--muted);
+            margin-bottom: 12px;
+        }
+        .team-name { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+        .team-role { font-size: 11px; font-weight: 600; margin-bottom: 8px; }
+        .team-bio { font-size: 11px; color: var(--muted); line-height: 1.5; text-align: left; }
+
+        /* ─── ROADMAP ─── */
+        .roadmap-card { padding: 24px; }
+        .rm-item { display: flex; align-items: flex-start; gap: 14px; padding: 12px 14px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); margin-bottom: 8px; }
+        .rm-item:last-child { margin-bottom: 0; }
+        .rm-q { font-size: 11px; font-weight: 800; min-width: 52px; padding-top: 2px; }
+        .rm-q.active { color: var(--green); }
+        .rm-q.inactive { color: var(--muted); }
+        .rm-divider { width: 1px; background: var(--border-hi); align-self: stretch; }
+        .rm-text { font-size: 12px; color: var(--text); line-height: 1.6; padding-top: 1px; }
+
+        /* ─── BIZ MODEL ─── */
+        .biz-card { padding: 18px; }
+        .biz-tier { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+        .biz-price { font-size: 26px; font-weight: 900; margin-bottom: 4px; }
+        .biz-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+        /* ─── METRICS ─── */
+        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px; }
+        .metric-item {}
+        .metric-lbl { font-size: 9px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+        .metric-val { font-size: 20px; font-weight: 800; }
+
+        /* ─── INVESTMENT ─── */
+        .invest-card { padding: 28px; position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 20px; }
+        .invest-glow {
+            position: absolute; right: -80px; top: -80px;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(62,114,201,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .invest-amount { font-size: clamp(28px,5vw,44px); font-weight: 900; letter-spacing: -0.02em; }
+        .invest-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+        .use-of-funds { display: flex; flex-direction: column; gap: 10px; }
+        .fund-item { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+        .fund-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+        .contact-box { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+        .contact-box h4 { font-size: 12px; font-weight: 700; margin-bottom: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+        .contact-row { font-size: 13px; margin-bottom: 5px; }
+        .contact-row a { color: var(--green); text-decoration: none; }
+
+        /* ─── SECTION LABEL ─── */
+        .section-lbl { font-size: 10px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
+
+        /* ─── MOBILE ADJUSTMENTS ─── */
+        @media (max-width: 640px) {
+            .header { padding: 12px 16px; }
+            .badge, .seed-badge { display: none; }
+            .fin-btn span { display: none; }
+            .fin-btn { padding: 6px 10px; }
+            .content-area { padding: 14px; }
+            .grid-3 { grid-template-columns: 1fr; gap: 10px; }
+            .grid-2 { grid-template-columns: 1fr; gap: 10px; }
+            .col-span-2 { grid-column: span 1; }
+            .solution-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr 1fr !important; }
+            .metric-grid { grid-template-columns: 1fr 1fr; }
+            .invest-card { flex-direction: column; }
+            .comp-table-wrap { padding: 14px; }
+            .tab-btn span { display: none; }
+            .tab-btn { padding: 8px 12px; }
+            .nav-tabs { gap: 2px; padding: 8px 14px; }
+        }
+
+        @media (min-width: 641px) and (max-width: 900px) {
+            .grid-3 { grid-template-columns: 1fr 1fr; }
+            .grid-3 .col-span-2 { grid-column: span 2; }
+        }
+
+        /* Scrollbar mobile */
+        @supports (padding: max(0px)) {
+            .content-area { padding-bottom: max(20px, env(safe-area-inset-bottom)); }
+        }
     </style>
 </head>
-<body class="h-screen w-screen flex flex-col md:flex-row p-2 md:p-4 gap-4 md:gap-6">
+<body>
 
-    <!-- Элегантный фон -->
-    <div class="liquid-bg" id="bg-container">
-        <div class="liquid-blob blob-1"></div>
-        <div class="liquid-blob blob-2"></div>
-        <div class="liquid-blob blob-3"></div>
-    </div>
+<div class="aurora">
+    <div class="aurora-blob ab1"></div>
+    <div class="aurora-blob ab2"></div>
+    <div class="aurora-blob ab3"></div>
+</div>
 
-    <!-- ЛЕВАЯ ПАНЕЛЬ -->
-    <aside class="glass-panel w-full md:w-72 flex flex-row md:flex-col py-4 md:py-8 px-4 md:px-6 shrink-0 z-10 items-center md:items-stretch justify-between md:justify-start">
-        <div class="flex items-center gap-3 md:mb-12">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accentGreen to-emerald-800 shadow-[0_0_15px_rgba(46,160,113,0.3)] flex items-center justify-center text-white shrink-0">
-                <i class="ph-fill ph-leaf text-2xl"></i>
-            </div>
-            <div>
-                <h1 class="font-black text-xl md:text-2xl leading-tight text-textMain tracking-tight">PSYHUB</h1>
-                <p class="text-[10px] text-accentGreen font-bold uppercase tracking-widest">Investor Deck</p>
-            </div>
-        </div>
+<div class="app">
 
-        <!-- Навигация Desktop -->
-        <nav class="hidden md:flex flex-col gap-3 flex-1 nav-menu">
-            <button data-target="tab-problem" class="nav-btn active-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-white/5 border border-white/5 shadow-sm text-textMain font-bold text-sm transition w-full text-left">
-                <i class="ph-fill ph-shield-warning text-xl text-accentGreen"></i> Проблема & Решение
-            </button>
-            <button data-target="tab-market" class="nav-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 text-textMuted font-medium text-sm transition w-full text-left border border-transparent">
-                <i class="ph-fill ph-chart-pie-slice text-xl"></i> Рынок & Конкуренты
-            </button>
-            <button data-target="tab-team" class="nav-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 text-textMuted font-medium text-sm transition w-full text-left border border-transparent">
-                <i class="ph-fill ph-users-three text-xl"></i> Команда & Roadmap
-            </button>
-            <button data-target="tab-finance" class="nav-btn flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/5 text-textMuted font-medium text-sm transition w-full text-left border border-transparent">
-                <i class="ph-fill ph-trend-up text-xl"></i> Финансы & Раунд
-            </button>
-        </nav>
-
-        <div class="hidden md:block mt-auto bg-slate-900/50 p-5 rounded-2xl border border-white/5">
-            <p class="text-xs text-textMuted mb-2">Статус раунда</p>
-            <div class="flex items-center gap-2 text-sm font-bold text-textMain">
-                <span class="relative flex h-2.5 w-2.5">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accentGreen opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-accentGreen"></span>
-                </span>
-                Seed (Smart Money)
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">🌿</div>
+            <div class="logo-text">
+                <h1>PSYHUB</h1>
+                <span>Investor Deck</span>
             </div>
         </div>
-    </aside>
-
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
-    <main class="flex-1 h-full flex flex-col overflow-hidden z-10 relative">
-        
-        <header class="hidden md:flex justify-between items-center mb-6 px-2">
-            <div class="flex items-center gap-4 text-sm font-medium text-textMuted">
-                <span class="bg-slate-800/40 px-4 py-2 rounded-full border border-white/5 shadow-sm">B2B2C SaaS / HealthTech</span>
+        <div class="header-right">
+            <div class="badge" style="display:none;display:flex;" id="badge-tag">B2B2C · HealthTech</div>
+            <div class="seed-badge">
+                <div class="seed-dot"></div>
+                Seed Round
             </div>
-            <a href="https://docs.google.com/spreadsheets/d/11gcHDpwoYFIhdwOiPsD3ap7R_KBfMu-r/edit?usp=sharing&ouid=101884777253809193548&rtpof=true&sd=true" target="_blank" class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-sm font-bold text-textMain hover:bg-white/10 transition flex items-center gap-2 backdrop-blur-md">
-                <i class="ph-fill ph-table text-lg text-accentGreen"></i> Открыть Фин. Модель
+            <a href="https://docs.google.com/spreadsheets/d/11gcHDpwoYFIhdwOiPsD3ap7R_KBfMu-r/edit?usp=sharing" target="_blank" class="fin-btn">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--green)"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                <span>Фин. модель</span>
             </a>
-        </header>
-
-        <div class="scroll-area flex-1 overflow-y-auto pr-2 md:pr-4 pb-24 md:pb-10">
-            
-            <!-- ВКЛАДКА 1: ПРОБЛЕМА И РЕШЕНИЕ -->
-            <div id="tab-problem" class="tab-content active">
-                <div class="mb-8 px-2 animate-item">
-                    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-textMain mb-3">Экосистема, меняющая правила.</h2>
-                    <p class="text-textMuted max-w-3xl text-base md:text-lg font-medium">Мы объединили весь инструментарий психолога в одном окне, обеспечив <strong class="text-accentGreen">100% юридическую защиту</strong>.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                    <div class="glass-panel p-6 animate-item delay-1 border-t-2 border-t-slate-500/50">
-                        <div class="text-4xl font-black text-textMain mb-2">5-7</div>
-                        <p class="text-sm text-textMuted">Разных сервисов (Zoom, WA, Excel, банки) использует 1 психолог, теряя время и клиентов.</p>
-                    </div>
-                    <div class="glass-panel p-6 animate-item delay-1 border-t-2 border-t-rose-500/50">
-                        <div class="text-4xl font-black text-textMain mb-2">Закон РК</div>
-                        <p class="text-sm text-textMuted">Хранение мед. данных в зарубежных мессенджерах незаконно. Рынок требует локального решения.</p>
-                    </div>
-                    <div class="glass-panel p-6 animate-item delay-1 border-t-2 border-t-amber-500/50">
-                        <div class="text-4xl font-black text-textMain mb-2">Тень</div>
-                        <p class="text-sm text-textMuted">Засилье «лжепсихологов» без образования уничтожает доверие к настоящим специалистам.</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="glass-panel p-6 lg:col-span-2 relative overflow-hidden animate-item delay-2">
-                        <div class="absolute -right-20 -top-20 w-64 h-64 bg-accentGreen/10 rounded-full blur-[80px]"></div>
-                        <h3 class="text-xs font-bold text-accentGreen uppercase tracking-widest mb-4 relative z-10">Решение: All-in-One Пространство</h3>
-                        <p class="text-base text-textMain mb-6 max-w-xl relative z-10">Psyhub — это не просто видеосвязь. Это полноценный кабинет, где автоматизирована вся рутина, а закон РК выступает нашим защитным рвом.</p>
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 relative z-10">
-                            <div class="bg-white/5 p-4 rounded-xl border border-white/5">
-                                <i class="ph-fill ph-squares-four text-accentBlue text-xl mb-2"></i>
-                                <h4 class="font-bold text-textMain text-sm">Удобство</h4>
-                                <p class="text-xs text-textMuted mt-1">CRM, биллинг, календарь и МАК-карты в одном месте.</p>
-                            </div>
-                            <div class="bg-white/5 p-4 rounded-xl border border-white/5">
-                                <i class="ph-fill ph-shield-check text-accentGreen text-xl mb-2"></i>
-                                <h4 class="font-bold text-textMain text-sm">Легальность</h4>
-                                <p class="text-xs text-textMuted mt-1">Сервера в РК. 100% Data Compliance.</p>
-                            </div>
-                            <div class="bg-white/5 p-4 rounded-xl border border-white/5">
-                                <i class="ph-fill ph-bank text-slate-400 text-xl mb-2"></i>
-                                <h4 class="font-bold text-textMain text-sm">GovTech</h4>
-                                <p class="text-xs text-textMuted mt-1">Отсев шарлатанов через eGov-верификацию.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel p-6 animate-item delay-3 flex flex-col justify-center">
-                        <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-4">Тайминг проекта</h3>
-                        <div class="space-y-4">
-                            <div class="flex gap-3">
-                                <div class="w-2 h-2 rounded-full bg-accentGreen mt-1.5 shrink-0"></div>
-                                <div><h4 class="font-bold text-sm text-textMain">Q2 2026 (Сейчас)</h4><p class="text-xs text-textMuted">Успешный пилот. Подтвержденный спрос.</p></div>
-                            </div>
-                            <div class="flex gap-3">
-                                <div class="w-2 h-2 rounded-full bg-accentBlue mt-1.5 shrink-0"></div>
-                                <div><h4 class="font-bold text-sm text-textMain">Q3 2026</h4><p class="text-xs text-textMuted">Seed-раунд. Масштабирование и B2B.</p></div>
-                            </div>
-                            <div class="flex gap-3">
-                                <div class="w-2 h-2 rounded-full bg-slate-500 mt-1.5 shrink-0"></div>
-                                <div><h4 class="font-bold text-sm text-textMain">2027</h4><p class="text-xs text-textMuted">Ожидаемая обязательная сертификация телемед. сервисов.</p></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ВКЛАДКА 2: РЫНОК И КОНКУРЕНТЫ -->
-            <div id="tab-market" class="tab-content">
-                <div class="mb-8 px-2 animate-item">
-                    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-textMain mb-3">Свободная ниша.</h2>
-                    <p class="text-textMuted max-w-3xl text-base md:text-lg font-medium">Огромный рынок, который нуждается в легальном и удобном инструменте.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                    <div class="glass-panel p-6 text-center animate-item delay-1">
-                        <p class="text-xs text-textMuted font-bold uppercase tracking-widest mb-2">TAM (Общий рынок)</p>
-                        <div class="text-3xl font-black text-textMain mb-2">~15 млрд ₸</div>
-                        <p class="text-xs text-textMuted">Все психологи и центры ментального здоровья в РК.</p>
-                    </div>
-                    <div class="glass-panel p-6 text-center border border-accentGreen/30 bg-accentGreen/5 animate-item delay-1">
-                        <p class="text-xs text-accentGreen font-bold uppercase tracking-widest mb-2">SAM (Доступный рынок)</p>
-                        <div class="text-3xl font-black text-accentGreen mb-2">~4.5 млрд ₸</div>
-                        <p class="text-xs text-textMuted">Специалисты, обязанные соблюдать закон о ПД.</p>
-                    </div>
-                    <div class="glass-panel p-6 text-center animate-item delay-1">
-                        <p class="text-xs text-textMuted font-bold uppercase tracking-widest mb-2">SOM (Целевой охват 3 года)</p>
-                        <div class="text-3xl font-black text-textMain mb-2">~800 млн ₸</div>
-                        <p class="text-xs text-textMuted">Реалистичный план захвата доли рынка через B2B и B2C.</p>
-                    </div>
-                </div>
-
-                <div class="glass-panel p-6 md:p-8 animate-item delay-2 overflow-x-auto">
-                    <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-6">Конкурентное преимущество</h3>
-                    <table class="w-full text-left min-w-[600px]">
-                        <thead>
-                            <tr class="border-b border-white/10 text-xs text-textMuted uppercase tracking-wider">
-                                <th class="py-3 px-4 font-medium">Критерий</th>
-                                <th class="py-3 px-4 font-bold text-accentGreen bg-white/5 rounded-t-lg">Psyhub</th>
-                                <th class="py-3 px-4 font-medium">Zoom / WA</th>
-                                <th class="py-3 px-4 font-medium">B17 / Alter (РФ)</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-sm text-textMain">
-                            <tr class="border-b border-white/5">
-                                <td class="py-4 px-4">Встроенная CRM и Биллинг</td>
-                                <td class="py-4 px-4 bg-white/5"><i class="ph-fill ph-check-circle text-accentGreen text-xl"></i></td>
-                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
-                                <td class="py-4 px-4"><i class="ph-fill ph-warning-circle text-amber-500 text-xl"></i></td>
-                            </tr>
-                            <tr class="border-b border-white/5">
-                                <td class="py-4 px-4">МАК-карты и Тестирование</td>
-                                <td class="py-4 px-4 bg-white/5"><i class="ph-fill ph-check-circle text-accentGreen text-xl"></i></td>
-                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
-                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
-                            </tr>
-                            <tr class="border-b border-white/5">
-                                <td class="py-4 px-4">Сервера в РК (Закон о ПД)</td>
-                                <td class="py-4 px-4 bg-white/5"><i class="ph-fill ph-check-circle text-accentGreen text-xl"></i></td>
-                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
-                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
-                            </tr>
-                            <tr>
-                                <td class="py-4 px-4">eGov верификация диплома</td>
-                                <td class="py-4 px-4 bg-white/5 rounded-b-lg"><i class="ph-fill ph-check-circle text-accentGreen text-xl"></i></td>
-                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
-                                <td class="py-4 px-4"><i class="ph-fill ph-x-circle text-rose-500 text-xl"></i></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ВКЛАДКА 3: КОМАНДА И ROADMAP -->
-            <div id="tab-team" class="tab-content">
-                <div class="mb-8 px-2 animate-item">
-                    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-textMain mb-3">Execution.</h2>
-                    <p class="text-textMuted max-w-3xl text-base md:text-lg font-medium">Команда с экспертизой в IT, психологии и B2B продажах.</p>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <div class="glass-panel p-5 text-center animate-item delay-1">
-                        <div class="w-16 h-16 mx-auto bg-slate-800 rounded-full mb-3 flex items-center justify-center text-xl font-bold text-textMuted border border-white/10">НУ</div>
-                        <h3 class="font-bold text-textMain text-sm">Нурлыбек Усеров</h3>
-                        <p class="text-accentGreen text-xs font-bold mb-2">CEO & Founder, Dev</p>
-                        <p class="text-[11px] text-textMuted text-left leading-relaxed">Опыт создания IT-проектов. Участник Astana Hub Garage. Full-stack разработка.</p>
-                    </div>
-                    <div class="glass-panel p-5 text-center animate-item delay-1">
-                        <div class="w-16 h-16 mx-auto bg-slate-800 rounded-full mb-3 flex items-center justify-center text-xl font-bold text-textMuted border border-white/10">МН</div>
-                        <h3 class="font-bold text-textMain text-sm">Мурат Нурсеитов</h3>
-                        <p class="text-accentBlue text-xs font-bold mb-2">Бизнес-аналитик</p>
-                        <p class="text-[11px] text-textMuted text-left leading-relaxed">5+ лет опыта в создании проектов и выстраивании моделей монетизации.</p>
-                    </div>
-                    <div class="glass-panel p-5 text-center animate-item delay-1">
-                        <div class="w-16 h-16 mx-auto bg-slate-800 rounded-full mb-3 flex items-center justify-center text-xl font-bold text-textMuted border border-white/10">АЮ</div>
-                        <h3 class="font-bold text-textMain text-sm">Альвина Юсупова</h3>
-                        <p class="text-purple-400 text-xs font-bold mb-2">Психолог-эксперт</p>
-                        <p class="text-[11px] text-textMuted text-left leading-relaxed">Практикующий психолог с опытом более 20 лет. Отвечает за методологию и CustDev.</p>
-                    </div>
-                    <div class="glass-panel p-5 text-center animate-item delay-1">
-                        <div class="w-16 h-16 mx-auto bg-slate-800 rounded-full mb-3 flex items-center justify-center text-xl font-bold text-textMuted border border-white/10">ДМ</div>
-                        <h3 class="font-bold text-textMain text-sm">Дархан Маратович</h3>
-                        <p class="text-amber-500 text-xs font-bold mb-2">Legal & Партнерства</p>
-                        <p class="text-[11px] text-textMuted text-left leading-relaxed">10+ лет опыта ведения сложных переговоров, B2B продаж и юр. документации.</p>
-                    </div>
-                </div>
-
-                <div class="glass-panel p-6 md:p-8 animate-item delay-2">
-                    <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-6">Дорожная карта (Ближайшие шаги)</h3>
-                    <div class="space-y-4">
-                        <div class="flex gap-4 items-center bg-white/5 p-3 rounded-xl border border-white/5">
-                            <div class="w-20 text-right font-bold text-accentGreen text-sm shrink-0">Q2 2026</div>
-                            <div class="w-2 h-2 rounded-full bg-accentGreen shrink-0"></div>
-                            <p class="text-sm text-textMain">Завершение пилота (PWA). Успешный CustDev. Подписание договоров с клиниками.</p>
-                        </div>
-                        <div class="flex gap-4 items-center bg-white/5 p-3 rounded-xl border border-white/5">
-                            <div class="w-20 text-right font-bold text-textMuted text-sm shrink-0">Q3 2026</div>
-                            <div class="w-2 h-2 rounded-full bg-slate-600 shrink-0"></div>
-                            <p class="text-sm text-textMain">Привлечение Seed-раунда. Перепланировка архитектуры под HighLoad. Интеграция eGov.</p>
-                        </div>
-                        <div class="flex gap-4 items-center bg-white/5 p-3 rounded-xl border border-white/5">
-                            <div class="w-20 text-right font-bold text-textMuted text-sm shrink-0">Q1 2027</div>
-                            <div class="w-2 h-2 rounded-full bg-slate-600 shrink-0"></div>
-                            <p class="text-sm text-textMain">Полноценный запуск B2B-модуля для клиник. Агрессивный маркетинг.</p>
-                        </div>
-                        <div class="flex gap-4 items-center bg-white/5 p-3 rounded-xl border border-white/5">
-                            <div class="w-20 text-right font-bold text-textMuted text-sm shrink-0">Q3 2027</div>
-                            <div class="w-2 h-2 rounded-full bg-slate-600 shrink-0"></div>
-                            <p class="text-sm text-textMain">500+ платящих специалистов. Выход на операционную окупаемость.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ВКЛАДКА 4: ФИНАНСЫ И ИНВЕСТИЦИИ -->
-            <div id="tab-finance" class="tab-content">
-                <div class="mb-8 px-2 animate-item">
-                    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-textMain mb-3">Unit-экономика и Раунд.</h2>
-                    <p class="text-textMuted max-w-3xl text-base md:text-lg font-medium">Понятная монетизация и четкий план использования средств.</p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
-                    <div class="lg:col-span-7 glass-panel p-6 md:p-8 animate-item delay-1">
-                        <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-6">Бизнес-модель</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div class="bg-white/5 p-4 rounded-xl border border-white/5">
-                                <h4 class="font-bold text-textMain text-sm mb-2 border-b border-white/10 pb-2">Транзакция (B2C)</h4>
-                                <div class="text-2xl font-black text-accentGreen mb-1">10%</div>
-                                <p class="text-xs text-textMuted">Комиссия с сессий. Лимит: не более 3000 ₸.</p>
-                            </div>
-                            <div class="bg-white/5 p-4 rounded-xl border border-white/5">
-                                <h4 class="font-bold text-textMain text-sm mb-2 border-b border-white/10 pb-2">Подписка (Pro)</h4>
-                                <div class="text-2xl font-black text-textMain mb-1">~50k ₸<span class="text-xs text-textMuted">/мес</span></div>
-                                <p class="text-xs text-textMuted">Продвинутая аналитика, безлимит инструментов.</p>
-                            </div>
-                            <div class="bg-white/5 p-4 rounded-xl border border-white/5">
-                                <h4 class="font-bold text-textMain text-sm mb-2 border-b border-white/10 pb-2">Enterprise (B2B)</h4>
-                                <div class="text-2xl font-black text-textMain mb-1">~99k ₸<span class="text-xs text-textMuted">/мес</span></div>
-                                <p class="text-xs text-textMuted">Пакет для клиник. Управление штатом.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-5 glass-panel p-6 md:p-8 animate-item delay-1">
-                        <h3 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-6">Метрики (Прогноз 12 мес)</h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <p class="text-[10px] text-textMuted uppercase mb-1">Целевой CAC</p>
-                                <div class="text-xl font-bold text-textMain">~5 000 ₸</div>
-                            </div>
-                            <div>
-                                <p class="text-[10px] text-textMuted uppercase mb-1">Целевой LTV</p>
-                                <div class="text-xl font-bold text-textMain">~45 000 ₸</div>
-                            </div>
-                            <div>
-                                <p class="text-[10px] text-textMuted uppercase mb-1">Конверсия (Пилот)</p>
-                                <div class="text-xl font-bold text-textMain">20%</div>
-                            </div>
-                            <div>
-                                <p class="text-[10px] text-accentGreen uppercase mb-1">Target MRR</p>
-                                <div class="text-xl font-bold text-accentGreen">~7.5 млн ₸</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass-panel p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden animate-item delay-2">
-                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-accentBlue/20 rounded-full blur-[80px]"></div>
-                    
-                    <div class="relative z-10 flex-1">
-                        <h3 class="text-xs font-bold text-accentBlue uppercase tracking-widest mb-2">Инвестиционное предложение</h3>
-                        <div class="text-4xl md:text-5xl font-black text-textMain mb-2">17 100 000 ₸</div>
-                        <p class="text-sm text-textMuted mb-6">Привлекаем за X% доли (Seed). Pre-money оценка обсуждается.</p>
-                        
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3"><div class="w-3 h-3 bg-accentGreen rounded-sm"></div> <span class="text-sm text-textMain">40% — Доработка продукта (B2B, eGov)</span></div>
-                            <div class="flex items-center gap-3"><div class="w-3 h-3 bg-accentBlue rounded-sm"></div> <span class="text-sm text-textMain">40% — Маркетинг и продажи (CAC)</span></div>
-                            <div class="flex items-center gap-3"><div class="w-3 h-3 bg-slate-500 rounded-sm"></div> <span class="text-sm text-textMain">20% — Операционные расходы (Сервера, Legal)</span></div>
-                        </div>
-                    </div>
-
-                    <div class="relative z-10 bg-white/5 p-6 rounded-2xl border border-white/10 text-center w-full md:w-64 shrink-0">
-                        <h3 class="font-bold text-textMain mb-4">Контакты фаундера</h3>
-                        <p class="text-sm text-textMuted mb-1">Нурлыбек Усеров</p>
-                        <p class="text-sm text-white mb-1">+7 (XXX) XXX-XX-XX</p>
-                        <p class="text-sm text-accentGreen">founder@psyhub.kz</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </main>
+    </header>
 
-    <!-- МОБИЛЬНАЯ НИЖНЯЯ НАВИГАЦИЯ -->
-    <nav class="md:hidden fixed bottom-4 left-4 right-4 glass-panel p-2 flex justify-between z-50 nav-menu">
-        <button data-target="tab-problem" class="nav-btn active-btn flex-1 flex flex-col items-center gap-1 p-2 rounded-xl bg-white/10 text-accentGreen transition">
-            <i class="ph-fill ph-shield-warning text-xl"></i>
-            <span class="text-[10px] font-bold">Проблема</span>
+    <!-- NAV TABS -->
+    <nav class="nav-tabs">
+        <button class="tab-btn active" data-tab="problem">
+            <span class="tab-icon">⚡</span>
+            <span>Проблема</span>
         </button>
-        <button data-target="tab-market" class="nav-btn flex-1 flex flex-col items-center gap-1 p-2 rounded-xl text-textMuted transition">
-            <i class="ph-fill ph-chart-pie-slice text-xl"></i>
-            <span class="text-[10px] font-bold">Рынок</span>
+        <button class="tab-btn" data-tab="market">
+            <span class="tab-icon">📊</span>
+            <span>Рынок</span>
         </button>
-        <button data-target="tab-team" class="nav-btn flex-1 flex flex-col items-center gap-1 p-2 rounded-xl text-textMuted transition">
-            <i class="ph-fill ph-users-three text-xl"></i>
-            <span class="text-[10px] font-bold">Команда</span>
+        <button class="tab-btn" data-tab="team">
+            <span class="tab-icon">👥</span>
+            <span>Команда</span>
         </button>
-        <button data-target="tab-finance" class="nav-btn flex-1 flex flex-col items-center gap-1 p-2 rounded-xl text-textMuted transition">
-            <i class="ph-fill ph-trend-up text-xl"></i>
-            <span class="text-[10px] font-bold">Финансы</span>
+        <button class="tab-btn" data-tab="finance">
+            <span class="tab-icon">💰</span>
+            <span>Финансы</span>
         </button>
     </nav>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const navBtns = document.querySelectorAll('.nav-btn');
-            const tabs = document.querySelectorAll('.tab-content');
-            const bgContainer = document.getElementById('bg-container');
-            let rotation = 0;
+    <!-- CONTENT -->
+    <div class="content-area">
 
-            navBtns.forEach((btn) => {
-                btn.addEventListener('click', () => {
-                    rotation += 15; 
-                    bgContainer.style.transform = `rotate(${rotation}deg) scale(1.1)`;
+        <!-- TAB 1: PROBLEM -->
+        <div id="panel-problem" class="tab-panel active">
+            <div class="section-head">
+                <h2>Экосистема, меняющая правила.</h2>
+                <p>Мы объединили весь инструментарий психолога в одном окне — с <strong style="color:var(--green)">полной юридической защитой</strong> по закону РК.</p>
+            </div>
 
-                    const targetId = btn.getAttribute('data-target');
+            <div class="grid-3" style="margin-bottom:14px;">
+                <div class="card stat-card">
+                    <div class="stat-accent" style="background:var(--muted2);"></div>
+                    <div class="stat-value">5–7</div>
+                    <div class="stat-label">разных сервисов использует один психолог — Zoom, WhatsApp, Excel, банк, календарь</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-accent" style="background:#E25454;"></div>
+                    <div class="stat-value" style="font-size:22px;padding-top:6px;">Закон РК</div>
+                    <div class="stat-label">Хранение медданных в зарубежных мессенджерах незаконно. Рынок ждёт локальное решение.</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-accent" style="background:#C87800;"></div>
+                    <div class="stat-value" style="font-size:22px;padding-top:6px;">Теневая ниша</div>
+                    <div class="stat-label">Засилье лжепсихологов без образования уничтожает доверие к настоящим специалистам.</div>
+                </div>
+            </div>
 
-                    navBtns.forEach(b => {
-                        b.classList.remove('bg-white/5', 'bg-white/10', 'text-accentGreen', 'border-white/5', 'shadow-sm', 'text-textMain');
-                        b.classList.add('text-textMuted', 'border-transparent');
-                        
-                        if(b.getAttribute('data-target') === targetId) {
-                            b.classList.remove('text-textMuted', 'border-transparent');
-                            if(window.innerWidth >= 768) {
-                                b.classList.add('bg-white/5', 'text-textMain', 'border-white/5', 'shadow-sm');
-                            } else {
-                                b.classList.add('bg-white/10', 'text-accentGreen');
-                            }
-                        }
-                    });
+            <div class="grid-3">
+                <div class="card solution-card col-span-2">
+                    <div class="glow"></div>
+                    <div class="section-lbl" style="position:relative;z-index:1;">Решение — All-in-One кабинет</div>
+                    <p style="font-size:14px;color:var(--text);max-width:480px;line-height:1.7;position:relative;z-index:1;">Psyhub — не просто видеосвязь. Это полноценное рабочее пространство, где автоматизирована вся рутина, а закон РК выступает нашим конкурентным рвом.</p>
+                    <div class="solution-grid" style="position:relative;z-index:1;">
+                        <div class="sol-item">
+                            <div class="sol-icon" style="color:var(--blue);">⊞</div>
+                            <h4>Удобство</h4>
+                            <p>CRM, биллинг, календарь и МАК-карты в одном окне</p>
+                        </div>
+                        <div class="sol-item">
+                            <div class="sol-icon" style="color:var(--green);">🛡</div>
+                            <h4>Легальность</h4>
+                            <p>Серверы в РК. 100% Data Compliance по Закону о ПД</p>
+                        </div>
+                        <div class="sol-item">
+                            <div class="sol-icon" style="color:var(--muted);">🏛</div>
+                            <h4>GovTech</h4>
+                            <p>Верификация дипломов через eGov — отсев шарлатанов</p>
+                        </div>
+                    </div>
+                </div>
 
-                    tabs.forEach(tab => {
-                        tab.classList.remove('active');
-                        const items = tab.querySelectorAll('.animate-item');
-                        items.forEach(item => {
-                            item.style.animation = 'none';
-                            item.offsetHeight; 
-                            item.style.animation = null; 
-                        });
-                    });
-                    document.getElementById(targetId).classList.add('active');
-                });
-            });
+                <div class="card timeline-card">
+                    <div class="section-lbl">Тайминг</div>
+                    <div class="tl-item">
+                        <div class="tl-dot active"></div>
+                        <div>
+                            <div class="tl-label">Q2 2026 — сейчас</div>
+                            <div class="tl-text">Пилот завершён. Подтверждённый спрос.</div>
+                        </div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-dot blue"></div>
+                        <div>
+                            <div class="tl-label blue">Q3 2026</div>
+                            <div class="tl-text">Seed-раунд. Масштабирование и B2B-модуль.</div>
+                        </div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-dot gray"></div>
+                        <div>
+                            <div class="tl-label gray">2027</div>
+                            <div class="tl-text">Обязательная сертификация телемед-сервисов — мы уже внутри.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: MARKET -->
+        <div id="panel-market" class="tab-panel">
+            <div class="section-head">
+                <h2>Свободная ниша.</h2>
+                <p>Огромный рынок без единого легального и удобного инструмента.</p>
+            </div>
+
+            <div class="grid-3" style="margin-bottom:14px;">
+                <div class="card market-card">
+                    <div class="market-label">TAM · Общий рынок</div>
+                    <div class="market-value">~15 млрд ₸</div>
+                    <div class="market-desc">Все психологи и центры ментального здоровья в РК</div>
+                </div>
+                <div class="card market-card featured">
+                    <div class="market-label">SAM · Доступный рынок</div>
+                    <div class="market-value">~4.5 млрд ₸</div>
+                    <div class="market-desc">Специалисты, обязанные соблюдать закон о персональных данных</div>
+                </div>
+                <div class="card market-card">
+                    <div class="market-label">SOM · Цель 3 года</div>
+                    <div class="market-value">~800 млн ₸</div>
+                    <div class="market-desc">Реалистичный план захвата через B2B и B2C каналы</div>
+                </div>
+            </div>
+
+            <div class="card comp-table-wrap">
+                <div class="section-lbl">Конкурентная матрица</div>
+                <table class="comp-table">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left;">Критерий</th>
+                            <th class="hl" style="text-align:center;">Psyhub</th>
+                            <th style="text-align:center;">Zoom / WA</th>
+                            <th style="text-align:center;">B17 / Alter (РФ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Встроенная CRM и биллинг</td>
+                            <td class="hl" style="text-align:center;"><span class="check">✓</span></td>
+                            <td style="text-align:center;"><span class="cross">✕</span></td>
+                            <td style="text-align:center;"><span class="partial">~</span></td>
+                        </tr>
+                        <tr>
+                            <td>МАК-карты и тестирование</td>
+                            <td class="hl" style="text-align:center;"><span class="check">✓</span></td>
+                            <td style="text-align:center;"><span class="cross">✕</span></td>
+                            <td style="text-align:center;"><span class="cross">✕</span></td>
+                        </tr>
+                        <tr>
+                            <td>Серверы в РК (Закон о ПД)</td>
+                            <td class="hl" style="text-align:center;"><span class="check">✓</span></td>
+                            <td style="text-align:center;"><span class="cross">✕</span></td>
+                            <td style="text-align:center;"><span class="cross">✕</span></td>
+                        </tr>
+                        <tr>
+                            <td>eGov верификация диплома</td>
+                            <td class="hl" style="text-align:center;"><span class="check">✓</span></td>
+                            <td style="text-align:center;"><span class="cross">✕</span></td>
+                            <td style="text-align:center;"><span class="cross">✕</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 3: TEAM -->
+        <div id="panel-team" class="tab-panel">
+            <div class="section-head">
+                <h2>Execution.</h2>
+                <p>Команда с экспертизой в IT, психологии и B2B-продажах.</p>
+            </div>
+
+            <div class="team-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px;">
+                <div class="card team-card">
+                    <div class="avatar" style="background:rgba(46,160,113,0.15);color:var(--green);border-color:rgba(46,160,113,0.2);">НУ</div>
+                    <div class="team-name">Нурлыбек Усеров</div>
+                    <div class="team-role" style="color:var(--green);">CEO & Founder, Dev</div>
+                    <div class="team-bio">Опыт создания IT-проектов. Участник Astana Hub Garage. Full-stack разработка.</div>
+                </div>
+                <div class="card team-card">
+                    <div class="avatar" style="background:rgba(62,114,201,0.15);color:var(--blue);border-color:rgba(62,114,201,0.2);">МН</div>
+                    <div class="team-name">Мурат Нурсеитов</div>
+                    <div class="team-role" style="color:var(--blue);">Бизнес-аналитик</div>
+                    <div class="team-bio">5+ лет опыта в создании проектов и выстраивании моделей монетизации.</div>
+                </div>
+                <div class="card team-card">
+                    <div class="avatar" style="background:rgba(140,100,200,0.15);color:#9B72CF;border-color:rgba(140,100,200,0.2);">АЮ</div>
+                    <div class="team-name">Альвина Юсупова</div>
+                    <div class="team-role" style="color:#9B72CF;">Психолог-эксперт</div>
+                    <div class="team-bio">Практикующий психолог, 20+ лет. Методология и CustDev.</div>
+                </div>
+                <div class="card team-card">
+                    <div class="avatar" style="background:rgba(200,140,30,0.15);color:#C8A030;border-color:rgba(200,140,30,0.2);">ДМ</div>
+                    <div class="team-name">Дархан Маратович</div>
+                    <div class="team-role" style="color:#C8A030;">Legal & Партнёрства</div>
+                    <div class="team-bio">10+ лет в B2B-продажах, переговорах и юр. документации.</div>
+                </div>
+            </div>
+
+            <div class="card roadmap-card">
+                <div class="section-lbl">Дорожная карта</div>
+                <div class="rm-item">
+                    <div class="rm-q active">Q2 2026</div>
+                    <div class="rm-divider"></div>
+                    <div class="rm-text">Завершение пилота (PWA). Успешный CustDev. Подписание договоров с клиниками.</div>
+                </div>
+                <div class="rm-item">
+                    <div class="rm-q inactive">Q3 2026</div>
+                    <div class="rm-divider"></div>
+                    <div class="rm-text">Привлечение Seed-раунда. Рефакторинг архитектуры под HighLoad. Интеграция eGov.</div>
+                </div>
+                <div class="rm-item">
+                    <div class="rm-q inactive">Q1 2027</div>
+                    <div class="rm-divider"></div>
+                    <div class="rm-text">Запуск B2B-модуля для клиник. Агрессивный маркетинг и партнёрства.</div>
+                </div>
+                <div class="rm-item">
+                    <div class="rm-q inactive">Q3 2027</div>
+                    <div class="rm-divider"></div>
+                    <div class="rm-text">500+ платящих специалистов. Выход на операционную окупаемость.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: FINANCE -->
+        <div id="panel-finance" class="tab-panel">
+            <div class="section-head">
+                <h2>Unit-экономика и раунд.</h2>
+                <p>Понятная монетизация. Чёткий план расходования средств.</p>
+            </div>
+
+            <div class="grid-3" style="margin-bottom:14px;">
+                <div class="card biz-card">
+                    <div class="biz-tier">Транзакция · B2C</div>
+                    <div class="biz-price" style="color:var(--green);">10%</div>
+                    <div class="biz-desc">Комиссия с сессий. Лимит: не более 3 000 ₸ с транзакции.</div>
+                </div>
+                <div class="card biz-card">
+                    <div class="biz-tier">Подписка · Pro</div>
+                    <div class="biz-price">~50k ₸<span style="font-size:13px;color:var(--muted);font-weight:400;">/мес</span></div>
+                    <div class="biz-desc">Продвинутая аналитика, безлимит инструментов.</div>
+                </div>
+                <div class="card biz-card">
+                    <div class="biz-tier">Enterprise · B2B</div>
+                    <div class="biz-price">~99k ₸<span style="font-size:13px;color:var(--muted);font-weight:400;">/мес</span></div>
+                    <div class="biz-desc">Пакет для клиник. Управление штатом специалистов.</div>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-bottom:14px;">
+                <div class="card">
+                    <div class="metric-grid">
+                        <div class="metric-item">
+                            <div class="metric-lbl">Целевой CAC</div>
+                            <div class="metric-val">~50 000 ₸</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-lbl">Целевой LTV</div>
+                            <div class="metric-val">~400 000 ₸</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-lbl">Конверсия (пилот)</div>
+                            <div class="metric-val">~25%</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-lbl" style="color:var(--green);">Target MRR</div>
+                            <div class="metric-val" style="color:var(--green);">~8.5 млн ₸</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card invest-card">
+                    <div class="invest-glow"></div>
+                    <div style="position:relative;z-index:1;">
+                        <div class="section-lbl" style="color:var(--blue);">Инвестиционное предложение</div>
+                        <div class="invest-amount">17 100 000 ₸</div>
+                        <div class="invest-sub">15% доли / pre-money: 113 млн ₸ (Seed)</div>
+                    </div>
+                    <div class="use-of-funds" style="position:relative;z-index:1;">
+                        <div class="fund-item"><div class="fund-dot" style="background:var(--green);"></div>40% — Доработка продукта (B2B, eGov)</div>
+                        <div class="fund-item"><div class="fund-dot" style="background:var(--blue);"></div>40% — Маркетинг и продажи (CAC)</div>
+                        <div class="fund-item"><div class="fund-dot" style="background:var(--muted2);"></div>20% — Операционные расходы (серверы, Legal)</div>
+                    </div>
+                    <div class="contact-box" style="position:relative;z-index:1;">
+                        <h4>Контакт фаундера</h4>
+                        <div class="contact-row">Нурлыбек Усеров</div>
+                        <div class="contact-row">+7 (771) 864-88-27</div>
+                        <div class="contact-row"><a href="mailto:Userovnurik111@gmail.com">Userovnurik111@gmail.com</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /content-area -->
+</div><!-- /app -->
+
+<script>
+    const btns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+
+    btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tab = btn.dataset.tab;
+            btns.forEach(b => b.classList.remove('active'));
+            panels.forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('panel-' + tab).classList.add('active');
         });
-    </script>
+    });
+
+    // badge visibility
+    const badgeTag = document.getElementById('badge-tag');
+    function checkBadge() {
+        badgeTag.style.display = window.innerWidth >= 768 ? 'flex' : 'none';
+    }
+    checkBadge();
+    window.addEventListener('resize', checkBadge);
+</script>
 </body>
 </html>
